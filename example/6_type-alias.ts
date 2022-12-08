@@ -24,8 +24,19 @@ function getPerson(): Person {
 // #3
 type Hero = {
   skill: string;
+};
+
+const capt: Hero = {
+  // skill: 'throwing a shield'
+};
+
+interface dd {
+  test: string;
 }
 
-const capt: Hero = { 
-  // skill: 'throwing a shield' 
-}
+type dtd = {
+  test: string;
+};
+
+let test: dd;
+let test2: dtd;
