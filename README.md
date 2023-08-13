@@ -39,3 +39,9 @@
 
 ## 타입 가드
 - 특정 타입으로 타입의 범위를 좁현나가는(필터링 하는) 과정
+```ts
+function askSomeone(someone: Developer | Person) {
+  someone.name; // O
+  someone.age; // X - 공통된 속성에 대해서만 정의 가능(타입 가드)
+}
+```
