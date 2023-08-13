@@ -42,8 +42,15 @@
 
 
 ```ts
+// 유니온 타입
 function askSomeone(someone: Developer | Person) {
   someone.name; // O
   someone.age; // X - 공통된 속성에 대해서만 정의 가능(타입 가드)
+}
+
+// 인터섹션 타입
+function askSomeone(someone: Developer & Person) {
+  someone.name; // O
+  someone.age; // O 
 }
 ```
