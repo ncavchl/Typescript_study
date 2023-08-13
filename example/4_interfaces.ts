@@ -29,6 +29,16 @@ const testFunction: ITest = (a, b) => {
   return a + b;
 };
 
+// 딕셔너리 패턴
+interface StringRegexDicitonary {
+  [key: string]: RegExp; // 정규표현식 생성자
+}
+
+var obj: StringRegexDicitonary = {
+  cssFile: /\.css$/,
+  jsFile: /\.js$/,
+};
+
 
 
 // 배열의 인덱싱에 사용하는 경우
@@ -50,10 +60,3 @@ interface Developer extends Person {
 }
 const joo: Developer = { name: "joo", age: 20, language: "ts" };
 
-interface StringRegexDicitonary {
-  [key: string]: RegExp; // 정규표현식 생성자
-}
-
-var obj: StringRegexDicitonary = {
-  cssFile: /\.css$/,
-};
