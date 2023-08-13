@@ -21,6 +21,15 @@ getUser(seho);
 // sum = function (num1: number, num2: string): number {
 //   return num1 + num2;
 // };
+interface ITest {
+  (a: number, b: number): number;
+}
+
+const testFunction: ITest = (a, b) => {
+  return a + b;
+};
+
+
 
 // 배열의 인덱싱에 사용하는 경우
 interface StringArray {
