@@ -54,3 +54,45 @@ function askSomeone(someone: Developer & Person) {
   someone.age; // O 
 }
 ```
+
+
+## Enums
+- 특정 값들의 집합을 의미하는 자료
+```ts
+// 숫자형 이넘
+enum Shoes {
+  Nike,
+  Adidas,
+}
+
+const myShoes = Shoes.Nike;
+console.log(myShoes); // 0
+
+// 문자형 이넘
+enum Shoes {
+  Nike = '나이키',
+  Adidas = '아디다스',
+}
+
+const myShoes = Shoes.Nike;
+console.log(myShoes); //  "\uB098\uC774\uD0A4"
+
+// 활용
+
+enum Answer {
+  yes = 'Y',
+  no = 'N',
+}
+function ask(ans: Answer) {
+  if (ans === Answer.yes) {
+    console.log('');
+  }
+  if (ans === Answer.no) {
+    console.log('');
+  }
+}
+
+ask(Answer.yes);
+ask(Answer.no);
+ask('N'); // error
+```
