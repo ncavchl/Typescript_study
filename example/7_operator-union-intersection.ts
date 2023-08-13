@@ -23,7 +23,7 @@ function logMessage(value: string | number) {
   throw new TypeError('value must be string or number')
 }
 
-// # Intersection 타입 문법
+// # Union 타입 문법
 interface Developer {
   name: string;
   skill: string;
@@ -36,5 +36,12 @@ interface Person {
 
 function askSomeone(someone: Developer | Person) {
   someone.name; // O
-  someone.age; // X
+  someone.age; // X - 공통된 속성에 대해서만 정의 가능(타입 가드)
 }
+
+// # Intersection 타입 문법
+function askSomeone2(someone: Developer & Person) {
+  someone.name; // O
+  someone.age; // X - 공통된 속성에 대해서만 정의 가능(타입 가드)
+}
+
