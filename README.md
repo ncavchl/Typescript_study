@@ -26,3 +26,12 @@
 
 **Copyright © 2020 Captain Pangyo**
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivs 4.0 Unported License</a>.
+
+
+## 강의 메모
+### interface, type 차이
+- type 별칭 사용시 타입의 모습(내부 요소)을 프리뷰로 바로 확인 가능함
+- type 별칭 : 새로운 타입 값을 하나 생성하는 것이 아닌, 정의한 타입에 나중에 쉽게 참고할 수 있게 이름을 부여하는 것
+- **타입의 확장 가능/불가능 여부**
+- 인터페이스는 확장이 가능함(extends), 타입 별칭이 불가능하므로 `type` 보다 `interface` 사용 권장
+- 좋은 소프트웨어는 언제나 확장이 용이해야한다는 원칙 (https://ko.wikipedia.org/wiki/%EA%B0%9C%EB%B0%A9-%ED%8F%90%EC%87%84_%EC%9B%90%EC%B9%99)
