@@ -34,7 +34,7 @@
 - type 별칭 : 새로운 타입 값을 하나 생성하는 것이 아닌, 정의한 타입에 나중에 쉽게 참고할 수 있게 이름을 부여하는 것
 - **타입의 확장 가능/불가능 여부**
 - 인터페이스는 확장이 가능함(extends), 타입 별칭이 불가능하므로 `type` 보다 `interface` 사용 권장
-- [좋은 소프트웨어는 언제나 확장이 용이해야한다는 원칙]([https://www.google.com/intl/ko/chrome/](https://ko.wikipedia.org/wiki/%EA%B0%9C%EB%B0%A9-%ED%8F%90%EC%87%84_%EC%9B%90%EC%B9%9))
+- [좋은 소프트웨어는 언제나 확장이 용이해야한다는 원칙](https://ko.wikipedia.org/wiki/%EA%B0%9C%EB%B0%A9-%ED%8F%90%EC%87%84_%EC%9B%90%EC%B9%9/)
 
 
 ## 타입 가드
