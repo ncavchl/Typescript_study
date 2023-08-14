@@ -182,3 +182,64 @@ div.innerText .. // 사용가능
 
 ### 타입 가드 (type quard)
 - 특정 범위 안에서 런타입 타입 검사를 수행하는 표현식
+```ts
+  // 타입 가드
+function isDeveloper(target: IDeveloper | IPerson): target is IDeveloper {
+  return (target as IDeveloper).skill !== undefined;
+}
+
+const tony: IDeveloper = { name: 'ff', skill: 'ff' };
+
+if (isDeveloper(tony)) {
+  console.log(tony.skill);
+} else {
+  console.log(tony);
+}
+```
+
+### 타입 호환 (type compatibility)
+- 특정 타입이 다른 타입에 맞는지를 의미
+```ts
+interface IIronman {
+    name: string;
+  }
+
+  let hero: IIronman = { name: 'f' };
+
+  const capt = { name: 'test', location: 'tet' };
+
+  hero = capt;
+
+  console.log(hero);
+
+  class Avengers {
+    name: string;
+    constructor(name: string) {
+      this.name = name;
+    }
+  }
+
+  let i: IIronman = { name: 'f' };
+
+  i = new Avengers('f');
+
+  class Hulk {
+    handSize: number;
+    constructor(name: string, handSize: number) {
+      this.handSize = handSize;
+    }
+  }
+
+  class Captain {
+    handSize: number;
+    constructor(handSize: number) {
+      this.handSize = handSize;
+    }
+  }
+
+  let a: Hulk = { handSize: 1 };
+  let s: Captain = { handSize: 1 };
+
+  a = s; // OK
+  s = a; // OK
+```
