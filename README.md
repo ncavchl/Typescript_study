@@ -159,3 +159,26 @@ const capt = new Person('캡', 100);
      - hoisting 에 영향 받음
      - 변수 선언된 이후에만 호출 가능
      - 선언된 범위 내에서만 사용 가능
+    
+### 타입 단언 (type assertion)
+- `as` 키워드 사용
+- 내가 정의한 타입으로 간주해라
+- DOM API 조작시에 많이 사용
+```ts
+var div = document.querySelector('div'); // querySelector 하위에 들어간 태그에 맞게 div 타입 정의됨
+
+// div 는 null 일 수도 있기 때문에 에러 발생
+div.innerText ...
+
+// 일반적인
+if (div) {
+  div.innerText ... // div 가 있는지 확인 후 사용해야 함
+}
+
+// 단언
+var div = document.querySelector('div') as HTMLDivElement;
+div.innerText .. // 사용가능
+```
+
+### 타입 가드 (type quard)
+- 특정 범위 안에서 런타입 타입 검사를 수행하는 표현식
