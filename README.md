@@ -243,3 +243,5 @@ interface IIronman {
   a = s; // OK
   s = a; // OK
 ```
+
+### 타입 모듈화
