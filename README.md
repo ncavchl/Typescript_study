@@ -181,7 +181,7 @@ div.innerText .. // 사용가능
 ```
 
 ### 타입 가드 (type quard)
-- 특정 범위 안에서 런타입 타입 검사를 수행하는 표현식
+- 특정 범위 안에서 런타임 타입 검사를 수행하는 표현식
 ```ts
   // 타입 가드
 function isDeveloper(target: IDeveloper | IPerson): target is IDeveloper {
@@ -199,6 +199,7 @@ if (isDeveloper(tony)) {
 
 ### 타입 호환 (type compatibility)
 - 특정 타입이 다른 타입에 맞는지를 의미
+- 함수와 제네릭은 다르게 할당시 같다 판단 불가
 ```ts
 interface IIronman {
     name: string;
@@ -245,3 +246,37 @@ interface IIronman {
 ```
 
 ### 타입 모듈화
+
+### 타입 utility
+```ts
+interface IProduct {
+  id: number;
+  name: string;
+  price: number;
+  brand: string;
+  stock: number;
+}
+
+const products: IProduct[] = [{ id: 1, name: '참치김밥', price: 3000, brand: '김가네', stock: 3 }];
+
+function displayProduct(productInfo: { id: 1; name: '참치김밥'; price: 3000 }) {
+  // ...
+}
+
+// #1 - Partial
+type TSubset<T> = {
+  [K in keyof T]?: T[K];
+};
+
+const productDetail: TSubset<IProduct> = { id: 1 };
+
+// #2 - Pick
+type TPickFewThings<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+
+const productName: TPickFewThings<IProduct, 'name'> = { name: '1' };
+const productNameWithPrice: TPickFewThings<IProduct, 'name' | 'price'> = { name: 'f', price: 1 };
+
+```
+
