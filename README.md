@@ -114,3 +114,12 @@ const capt = new Person('Steve', 100);
 - 자바스크립트 prototype 기반 언어다
   - 모든 객체들이 메소드와 속성들을 상속 받기 위한 템플릿으로써 `prototype object`를 가진다.
   - `prototype chain` : 프로토타입 객체도 또 다시 상위 프로토타입 객체로부터 메소드와 속성을 상속 받을 수도 있고, 그 상위 프로토타입 객체도 마찬가지. 다른 객체에 정의된 메소드와 속성을 한 객체에서 사용할 수 있도록 하는 근간
+- class 대신 함수형 문법으로도 생성 가능
+``` ts
+function Person(name: string, age: number) {
+  this.name = name;
+  this.age = age;
+}
+
+const capt = new Person('캡', 100);
+```
