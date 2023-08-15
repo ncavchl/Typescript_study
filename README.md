@@ -1,3 +1,6 @@
+# 타입스크립트 핸드북
+- https://joshua1988.github.io/ts/usage/utility.html#%EC%9E%90%EC%A3%BC-%EC%82%AC%EC%9A%A9%EB%90%98%EB%8A%94-%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0-%ED%83%80%EC%9E%85-%EB%AA%87-%EA%B0%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0
+
 # learn-typescript
 
 인프런의 [타입스크립트 입문 - 기초부터 실전까지](https://www.inflearn.com/course/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%9E%85%EB%AC%B8?inst=f1ae9299&utm_source=blog&utm_medium=githubio&utm_campaign=captianpangyo&utm_term=banner) 온라인 강의 리포지토리입니다.
@@ -248,6 +251,8 @@ interface IIronman {
 ### 타입 모듈화
 
 ### 타입 utility
+- 유틸리티 타입은 이미 정의해 놓은 타입을 변환할 때 사용하기 좋은 타입 문법
+  
 ```ts
 interface IProduct {
   id: number;
@@ -276,7 +281,103 @@ type TPickFewThings<T, K extends keyof T> = {
 };
 
 const productName: TPickFewThings<IProduct, 'name'> = { name: '1' };
+
+
+
 const productNameWithPrice: TPickFewThings<IProduct, 'name' | 'price'> = { name: 'f', price: 1 };
 
 ```
 
+#### Partial
+파셜(Partial) 타입은 특정 타입의 부분 집합을 만족하는 타입을 정의할 수 있습니다.
+```ts
+interface Address {
+  email: string;
+  address: string;
+}
+
+type MayHaveEmail = Partial<Address>;
+const me: MayHaveEmail = {}; // 가능
+const you: MayHaveEmail = { email: 'test@abc.com' }; // 가능
+const all: MayHaveEmail = { email: 'capt@hero.com', address: 'Pangyo' }; // 가능
+```
+#### Pick
+픽(Pick) 타입은 특정 타입에서 몇 개의 속성을 선택(pick)하여 타입을 정의할 수 있습니다.
+```ts
+interface Hero {
+  name: string;
+  skill: string;
+}
+const human: Pick<Hero, 'name'> = {
+  name: '스킬이 없는 사람',
+};
+type HasThen<T> = Pick<Promise<T>, 'then' | 'catch'>;
+let hasThen: HasThen<number> = Promise.resolve(4);
+hasThen.th // 위에서 'then'만 선택하면 'then'만 제공, 'catch' 선택하면 'catch만 제공'
+```
+
+#### Omit
+오밋(Omit) 타입은 특정 타입에서 지정된 속성만 제거한 타입을 정의해 줍니다.
+```ts
+interface AddressBook {
+  name: string;
+  phone: number;
+  address: string;
+  company: string;
+}
+const phoneBook: Omit<AddressBook, 'address'> = {
+  name: '재택근무',
+  phone: 12342223333,
+  company: '내 방'
+}
+const chingtao: Omit<AddressBook, 'address'|'company'> = {
+  name: '중국집',
+  phone: 44455557777
+}
+```
+
+### 맵드 타입
+#### 맵드 타입의 기본 문법
+맵드 타입은 위에서 살펴본 자바스크립트의 map 함수를 타입에 적용했다고 보시면 됩니다. 이를 위해서는 아래와 같은 형태의 문법을 사용해야 합니다.
+```ts
+{ [ P in K ] : T }
+{ [ P in K ]? : T }
+{ readonly [ P in K ] : T }
+{ readonly [ P in K ]? : T }
+```
+
+### 타입스크립트 설정 파일 (tsconfig.json)
+- 타입스크립트 설정 파일은 타입스크립트를 자바스크립트로 변환할 때의 설정을 정의해놓는 파일
+- 프로젝트에서 tsc라는 명령어를 치면 타입스크립트 설정 파일에 정의된 내용을 기준으로 변환 작업(컴파일)을 진행
+- tsc 명령어
+  - tsc 명령어는 타입스크립트를 자바스크립트로 변환할 때 사용하는 명령어, 아래와 같이 입력하면 app.ts 파일이 app.js로 변환됨.
+  - `tsc app.ts`
+
+#### 설정 파일 속성
+```ts
+{
+  // files: 타입스크립트 변환 명령어를 입력할 때마다 대상 파일의 경로를 지정하지 않고 설정 파일에 미리 정의해놓을 수 있습니다.
+  "files": ["app.ts", "./utils/math.ts"],
+  // include: files와 같이 파일을 개별로 지정하지 않고 include 옵션으로 변환할 폴더를 지정할 수 있습니다.
+ "include": ["src/**/*"],
+  // exclude: include와 반대되는 속성으로 변환하지 않을 폴더 경로를 지정
+  // 만약 설정하지 않으면 기본적으로 node_modules, bower_components 같은 폴더를 제외합니다.
+  // TIP : 컴파일 대상 경로를 정의하는 속성의 우선 순위 files > include = exclude
+  "exclude": ["node_modules"],
+  // extends: 특정 타입스크립트 설정 파일에서 다른 타입스크립트 설정의 내용을 가져와 추가할 수 있는 속성
+  "extends": "./config/base",
+  // target: 타입스크립트 파일을 컴파일 했을 때 빌드 디렉토리에 생성되는 자바스크립트의 버전을 의미합니다. 기본 값인 es3부터 es5, es6 등 가장 최신 버전인 esnext까지 있습니다.
+  "target": "esnext",
+  // lib: 타입스크립트 파일을 자바스크립트로 컴파일 할 때 포함될 라이브러리의 목록입니다. 이 속성을 활용하는 가장 대표적인 사례는 async 코드를 컴파일 할 때 Promise 객체가 필요하므로 아래와 같은 설정을 해줘야 합니다.l
+  "lib": ["es2015", "dom", "dom.iterable"]
+}
+```
+
+#### TIP
+와일드 카드 패턴<br/>
+- * : 해당 디렉토리의 모든 파일 검색 
+- ? : 해당 디렉토리 안에 파일의 이름 중 한 글자라도 맞으면 해당 
+- ** : 하위 디렉토리를 재귀적으로 접근(하위 디렉토리의 하위 디렉토리가 존재하는 경우 반복해서 접근)
+
+#### WARNING
+⚠️ 위 와일드 카드 패턴에 해당하는 파일 확장자는 js, jsx, ts, tsx, .d.ts 입니다.
